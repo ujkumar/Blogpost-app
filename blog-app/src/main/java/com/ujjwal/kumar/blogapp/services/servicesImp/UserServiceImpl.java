@@ -75,6 +75,7 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
+	// Here we are interchage the user object to userDto object
 	private UserDto userToDto(User user) {
 		UserDto newUser = new UserDto();
 		newUser.setId(user.getId());
