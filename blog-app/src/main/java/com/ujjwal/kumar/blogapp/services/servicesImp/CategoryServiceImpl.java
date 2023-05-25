@@ -37,6 +37,7 @@ public class CategoryServiceImpl implements CategoryService {
 		Category cgt = this.categoryRepo.findById(id).orElseThrow(() -> new ResourceNotFoundExecption("Category", "Id", id));
 		cgt.setCategoryTitle(cdto.getCategoryTitle());
 		cgt.setCategoryDescription(cdto.getCategoryDescription());
+		this.categoryRepo.save(cgt);
 		return this.mapper.map(cgt, CategoryDto.class);
 	}
 

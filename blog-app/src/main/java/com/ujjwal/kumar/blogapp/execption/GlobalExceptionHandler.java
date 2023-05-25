@@ -10,15 +10,17 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import com.ujjwal.kumar.blogapp.payloads.ApiResponse;
+
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 	
-//	@ExceptionHandler(ResourceNotFoundExecption.class)
-//	public ResponseEntity<ApiResponse> handelResourceNotFoundExecption(ResourceNotFoundExecption ex){
-//		String message = ex.getMessage();
-//		ApiResponse apiResponse = new ApiResponse(message,false);
-//		return new ResponseEntity<ApiResonse>(apiResponse,HttpStatus.NOT_FOUND);
-//	}
+	@ExceptionHandler(ResourceNotFoundExecption.class)
+	public ResponseEntity<ApiResponse> handelResourceNotFoundExecption(ResourceNotFoundExecption ex){
+		String message = ex.getMessage();
+		ApiResponse apiResponse = new ApiResponse(message,false);
+		return new ResponseEntity<ApiResponse>(apiResponse,HttpStatus.NOT_FOUND);
+	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<Map<String,String>> handelMethodArgumentNotValidException(MethodArgumentNotValidException ex){

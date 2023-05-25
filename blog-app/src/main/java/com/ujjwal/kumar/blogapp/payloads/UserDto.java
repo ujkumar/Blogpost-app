@@ -18,7 +18,6 @@ public class UserDto {
 	
 	@NotEmpty
 	@Size(min=8, message="Password must contain atleast 8 character and have atleast 1 upper, 1 lower, 1 number,1 special character!!")
-	@Pattern(regexp ="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
 	private String password;
 	
 	@NotEmpty
