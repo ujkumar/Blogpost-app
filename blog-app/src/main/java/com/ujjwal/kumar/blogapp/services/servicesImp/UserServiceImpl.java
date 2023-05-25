@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserRepositories userRepo;
+	
+	@Autowired
+	private ModelMapper mapper;
 
 	@Override
 	public UserDto createUser(UserDto userDto) {
@@ -66,23 +70,28 @@ public class UserServiceImpl implements UserService {
 	}
 
 	private User dtoToUser(UserDto userDto) {
-		User user = new User();
-		user.setId(userDto.getId());
-		user.setName(userDto.getName());
-		user.setEmail(userDto.getEmail());
-		user.setPassword(userDto.getPassword());
-		user.setAbout(userDto.getAbout());
+		// with the help of ModelMapper we can map one object to another object like 
+		//here are going do.
+		//It take two parameter one is from which class to
+		//which class name and another one is to which class with .class extension 
+		User user = this.mapper.map(userDto, User.class);
+		
+//		user.setId(userDto.getId());
+//		user.setName(userDto.getName());
+//		user.setEmail(userDto.getEmail());
+//		user.setPassword(userDto.getPassword());
+//		user.setAbout(userDto.getAbout());
 		return user;
 	}
 
-	// Here we are interchage the user object to userDto object
+	// Here we are interchange the user object to userDto object
 	private UserDto userToDto(User user) {
-		UserDto newUser = new UserDto();
-		newUser.setId(user.getId());
-		newUser.setName(user.getName());
-		newUser.setEmail(user.getEmail());
-		newUser.setPassword(user.getPassword());
-		newUser.setAbout(user.getAbout());
+		UserDto newUser = this.mapper.map(user, UserDto.class);
+//		newUser.setId(user.getId());
+//		newUser.setName(user.getName());
+//		newUser.setEmail(user.getEmail());
+//		newUser.setPassword(user.getPassword());
+//		newUser.setAbout(user.getAbout());
 		return newUser;
 	}
 

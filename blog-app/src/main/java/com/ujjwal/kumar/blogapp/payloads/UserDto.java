@@ -1,17 +1,27 @@
 package com.ujjwal.kumar.blogapp.payloads;
 
-//import lombok.Getter;
-//import lombok.NoArgsConstructor;
-//import lombok.Setter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
-//@NoArgsConstructor
-//@Getter
-//@Setter
 public class UserDto {
 	private int id;
+	
+	@NotEmpty
+	@Size(min=6, message="User name must be of atleast 6 charachet!!..")
 	private String name;
+	
+	@Email
+	@Pattern(regexp = "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-]+)(\\.[a-zA-Z]{2,5}){1,2}$")
 	private String email;
+	
+	@NotEmpty
+	@Size(min=8, message="Password must contain atleast 8 character and have atleast 1 upper, 1 lower, 1 number,1 special character!!")
+	@Pattern(regexp ="^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$")
 	private String password;
+	
+	@NotEmpty
 	private String about;
 	public UserDto() {
 		super();
