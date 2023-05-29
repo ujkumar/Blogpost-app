@@ -65,11 +65,13 @@ public class PostController {
 //		return new ResponseEntity<List<PostDto>>(this.postService.getAllPost(),HttpStatus.OK);
 //	}
 	
-	
+	//Get all the post with pagination and shorting 
 	@GetMapping("/user/posts")
 	public ResponseEntity<PostResponse> getAllPost(
 			@RequestParam(value = "pageNumber",defaultValue = "0",required = false) Integer pageNumber,
 			@RequestParam(value="pageSize",defaultValue="10",required = false) Integer pageSize
+//			@RequestParam(value = "sortBy",defaultValue = "post_Id",required = false)String sortBy,
+//			@RequestParam(value = "sortDir",defaultValue="asc",required = false)String sortDir
 			){
 		return new ResponseEntity<PostResponse>(this.postService.getAllPost(pageNumber,pageSize),HttpStatus.OK);
 	}
@@ -115,6 +117,13 @@ public class PostController {
 		return new ResponseEntity<PostResponse>(this.postService.getPostByCategory(pageNumber,pageSize,categoryId),HttpStatus.OK);
 	}
 	
+	
+	//Search the content by title.
+//	@GetMapping("/user/search/{keywords}")
+//	public ResponseEntity<List<PostDto>> searchKeywords(@PathVariable String keywords){
+//		return new ResponseEntity<List<PostDto>>(this.postService.searchPost(keywords),HttpStatus.OK);
+//	}
+//	
 	
 	
 }
