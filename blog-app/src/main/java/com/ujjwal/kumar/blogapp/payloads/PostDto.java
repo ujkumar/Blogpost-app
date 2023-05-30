@@ -1,5 +1,7 @@
 package com.ujjwal.kumar.blogapp.payloads;
 
+import java.util.Date;
+
 import com.ujjwal.kumar.blogapp.entity.Category;
 
 public class PostDto {
@@ -11,6 +13,26 @@ public class PostDto {
 	private CategoryDto category;
 	
 	private UserDto user;
+	
+	private String post_Image_name;
+	
+	private Date post_Added_date;
+
+	public String getPost_Image_name() {
+		return post_Image_name;
+	}
+
+	public void setPost_Image_name(String post_Image_name) {
+		this.post_Image_name = post_Image_name;
+	}
+
+	public Date getPost_Added_date() {
+		return post_Added_date;
+	}
+
+	public void setPost_Added_date(Date post_Added_date) {
+		this.post_Added_date = post_Added_date;
+	}
 
 	public String getPost_Title() {
 		return post_Title;

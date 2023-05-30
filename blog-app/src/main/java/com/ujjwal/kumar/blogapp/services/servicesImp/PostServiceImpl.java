@@ -41,6 +41,8 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	
+	
 	@Override
 	public PostDto createPost(PostDto postDto,Integer userId,Integer categoryId) {
 		//Here we are fetching the details of user
@@ -50,7 +52,7 @@ public class PostServiceImpl implements PostService {
 		Category category =this.cgtRepo.findById(categoryId).orElseThrow(() -> new ResourceNotFoundExecption("category", "Id", categoryId));
 		
 		Post postValue = this.modelMapper.map(postDto, Post.class);
-		postValue.setPost_Image_name("Default.png");
+		postValue.setPost_Image_name(postDto.getPost_Image_name());
 		postValue.setPost_Added_date(new Date());
 		postValue.setCategory(category);
 		postValue.setUser(user);
@@ -68,7 +70,8 @@ public class PostServiceImpl implements PostService {
 		Post olddata = this.postRepo.findById(postId).orElseThrow(()->new ResourceNotFoundExecption("Post", "postId", postId));
 		olddata.setPost_Title(postDto.getPost_Title());
 		olddata.setPost_content(postDto.getPost_content());
-		olddata.setPost_Added_date(new Date());
+		olddata.setPost_Added_date(postDto.getPost_Added_date());
+		olddata.setPost_Image_name(postDto.getPost_Image_name());
 		Post saveddata = this.postRepo.save(olddata);
 		return this.modelMapper.map(saveddata, PostDto.class);
 	}
