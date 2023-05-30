@@ -1,36 +1,40 @@
 package com.ujjwal.kumar.blogapp.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="posts")
+@Table(name = "posts")
 public class Post {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer post_Id;
-	
-	@Column(length=100, nullable=false)
+
+	@Column(length = 100, nullable = false)
 	private String post_Title;
-	
-	@Column(length=10000,nullable = false)
+
+	@Column(length = 10000, nullable = false)
 	private String post_content;
-	
+
 	private String post_Image_name;
-	
+
 	private Date post_Added_date;
-	
+
 	@ManyToOne
 	private Category category;
-	
+
 	@ManyToOne
 	private User user;
 
@@ -94,9 +98,8 @@ public class Post {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
-	
-	
+
+	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+	private Set<Comments> commentSet = new HashSet<>();
+
 }
